@@ -1,0 +1,35 @@
+<header class="container">
+  <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom" >
+    <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+      🚍<span class="fs-4">Pricing example</span>
+    </a>
+    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+      {{#if isProduct}}
+        <a class="me-3 py-2 text-dark" href="/products">Products</a>
+      {{else}}
+        <a class="me-3 py-2 text-dark text-decoration-none" href="/products">Products</a>
+      {{/if}}
+      
+      {{#if isAdd}}
+        <a class="me-3 py-2 text-dark" href="/add">Add</a>
+      {{else}}
+        <a class="me-3 py-2 text-dark text-decoration-none" href="/add">Add</a>
+      {{/if}}
+    </nav>
+    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+      {{#if isLogin}}
+        <a href="/login" class="btn btn-dark">Login</a>
+      {{else}}
+        <a href="/login" class="btn btn-outline-dark">Login</a>
+      {{/if}}
+      
+      {{#if isRegister}}
+        <a href="/register" class="btn btn-dark">Register</a>
+      {{else}}
+        <a href="/register" class="btn btn-outline-dark">Register</a>
+      {{/if}}
+      
+      <a href="/admin" class="btn btn-outline-dark">Admin</a>
+    </div>
+  </div>
+</header>
