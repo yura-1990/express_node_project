@@ -1,1 +1,57 @@
-<h1>Add</h1>
+<div class="container">
+  <form action="/add-product" class="w-50 mx-auto mt-5" method="post">
+
+    <h1 class="mb-3 fw-normal text-center">Add Product</h1>
+    {{#if errorProduct}}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> 
+        {{ errorProduct }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {{/if}}
+    <div class="form-floating">
+      <input
+        type="text"
+        class="form-control mt-3"
+        name="title"
+        id="floatingInput"
+        placeholder="name@example.com"
+      />
+      <label for="floatingInput">title</label>
+    </div>
+
+    <div class="form-floating">
+      <textarea
+        class="form-control mt-3"
+        placeholder="Leave a comment here"
+        id="comment"
+        style="height: 150px"
+        name="comment"
+      ></textarea>
+      <label for="comment">Leave a comment here ... </label>
+    </div>
+
+    <div>
+      <input
+        class="form-control form-control-lg mt-3"
+        name="image"
+        id="file"
+        type="file"
+      />
+    </div>
+
+    <div class="input-group mt-3">
+      <span class="input-group-text">$</span>
+      <input
+        type="number"
+        class="form-control"
+        aria-label="Amount (to the nearest dollar)"
+        name="price"
+      />
+      <span class="input-group-text">.00</span>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Add</button>
+
+  </form>
+</div>

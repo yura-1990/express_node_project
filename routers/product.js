@@ -1,4 +1,6 @@
 import { Router } from "express";
+import Products from '../models/Product.js'
+import auth from "../middleware/auth.js";
 
 const router = Router();
 
@@ -10,29 +12,32 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/add", (req, res) => {
-  /* res.sendFile(path.join(__dirname, 'views', 'about.html')) */
-  if (req.cookies.token) {
-    res.render("add", {
-      title: 'Add',
-      isAdd: true
-    });
-  } else {
-    res.redirect('/login')
-  }
+router.get("/add", auth, (req, res) => {
+  res.render("add", {
+    title: 'Add',
+    isAdd: true,
+    errorProduct: req.flash("errorProduct") 
+  });
 });
 
-router.get("/products", (req, res) => {
-  if (req.cookies.token) {
-    res.render("product", {
-      title: 'Product',
-      isProduct: true
-    });
-  }else{
-    res.redirect('/login')
-  }
- 
+router.get("/products", auth, (req, res) => {
+  res.render("product", {
+    title: 'Product',
+    isProduct: true,
+  });
 });
+
+router.post('/add-product', auth, async (req, res)=>{
+  const { title, comment, image, price } = req.body;
+
+  if (!title || !comment || !image || !price) {
+    req.flash("errorProduct", "All fields are required!");
+    return res.redirect("/add");
+  }
+  
+  const products = await Products.create(req.body)
+  return res.redirect('/')
+})
 
 
 export default router
