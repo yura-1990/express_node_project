@@ -12,17 +12,27 @@ router.get("/", (req, res) => {
 
 router.get("/add", (req, res) => {
   /* res.sendFile(path.join(__dirname, 'views', 'about.html')) */
-  res.render("add", {
-    title: 'Add',
-    isAdd: true
-  });
+  if (req.cookies.token) {
+    res.render("add", {
+      title: 'Add',
+      isAdd: true
+    });
+  } else {
+    res.redirect('/login')
+  }
 });
 
 router.get("/products", (req, res) => {
-  res.render("product", {
-    title: 'Product',
-    isProduct: true
-  });
+  if (req.cookies.token) {
+    res.render("product", {
+      title: 'Product',
+      isProduct: true
+    });
+  }else{
+    res.redirect('/login')
+  }
+ 
 });
+
 
 export default router

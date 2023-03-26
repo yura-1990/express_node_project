@@ -1,7 +1,16 @@
 <div class="container ">
+  
   <form action="/login" class="w-50 mx-auto mt-5" method="post">
   
     <h1 class="mb-3 fw-normal text-center">Login</h1>
+    
+    {{#if loginError}}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> 
+        {{ loginError }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {{/if}}
     
     <div class="form-floating">
       <input type="email" class="form-control mt-3" name="email" id="floatingInput" placeholder="name@example.com" />
