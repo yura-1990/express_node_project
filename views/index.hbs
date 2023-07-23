@@ -1,3 +1,27 @@
-<div class="container">
-  <h1>Home</h1>
+  <div class="container">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    {{#each userProducts}}
+      <div class="col">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <img src={{image}} alt="" class="img-fluid">
+            <p class="card-text">
+              {{ title }}
+            </p>
+            <p class="card-text">
+              {{ comment }}
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="avatar bg-primary d-flex justify-content-center m-0 p-0 text-white align-items-center">
+                {{capitaliseFirstLetter user.firstName user.lastName}}
+              </div>
+              <small class="text-muted">{{ createdAt }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
 </div>

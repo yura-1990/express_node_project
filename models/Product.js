@@ -6,6 +6,7 @@ const Productschema = new Schema(
     comment: { type: String, require: true },
     image: { type: String, require: true },
     price: { type: String, require: true },
+    user: { type: Schema.Types.ObjectId, ref: 'User' }
   },
   { timestamps: true }
 );

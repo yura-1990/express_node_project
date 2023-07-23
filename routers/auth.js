@@ -2,13 +2,12 @@ import { Router } from "express";
 import bcrypt from "bcrypt";
 import User from "../models/User.js";
 import { generateJWTToken } from "../services/token.js";
+import publicAuth from "../middleware/publicAuth.js";
+import auth from "../middleware/auth.js";
 
 const router = Router();
 
-router.get("/register", (req, res) => {
-  if (req.cookies.token) {
-    return res.redirect('/')
-  }
+router.get("/register", publicAuth, (req, res) => {
   res.render("register", {
     title: "Register",
     isRegister: true,
@@ -17,11 +16,7 @@ router.get("/register", (req, res) => {
   });
 });
 
-router.get("/login", (req, res) => {
-  
-  if (req.cookies.token) {
-    return res.redirect('/')
-  }
+router.get("/login", publicAuth, (req, res) => {
   res.render("login", {
     title: "Login",
     isLogin: true,
@@ -29,7 +24,7 @@ router.get("/login", (req, res) => {
   });
 });
 
-router.post("/register", async (req, res) => {
+router.post("/register", publicAuth, async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
   if (!firstName || !lastName || !email || !password) {
@@ -60,7 +55,7 @@ router.post("/register", async (req, res) => {
   res.redirect("/login");
 });
 
-router.post("/login", async (req, res) => {
+router.post("/login", publicAuth, async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     req.flash("loginError", "All fields are required!");
@@ -85,7 +80,7 @@ router.post("/login", async (req, res) => {
   res.redirect("/");
 });
 
-router.get("/logout", async (req, res) => {
+router.get("/logout", auth, async (req, res) => {
   res.clearCookie('token')
   return res.redirect('/')
 })
